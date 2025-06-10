@@ -1,0 +1,26 @@
+import 'dotenv/config'
+import express from 'express'
+
+import { connect } from './db.js'
+
+
+const app = express()
+const port = 8080
+
+
+app.use(express.json())
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    const status = err.status || 500;
+    const message = process.env.NODE_ENV === 'production'
+        ? 'Internal server Error'
+        : err.message;
+    return res.status(status).json({ error: message })
+})
+
+app.listen(port, async () => {
+    console.log(`Back-end is listening on port ${port}`)
+    connect()
+})
