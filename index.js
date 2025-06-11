@@ -11,8 +11,8 @@ const app = express()
 const port = 8080
 
 
-// app.use(helmet())
-// app.use(cors())
+app.use(helmet())
+app.use(cors())
 app.use(express.json())
 
 app.use(organisation_routes)

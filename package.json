@@ -22,7 +22,7 @@
     "url": "https://github.com/adriangcodes/materiality-assessment-tool/issues"
   },
   "homepage": "https://github.com/adriangcodes/materiality-assessment-tool#readme",
-  "type" : "module",
+  "type": "module",
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
