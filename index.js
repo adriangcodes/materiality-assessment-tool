@@ -1,14 +1,22 @@
 import 'dotenv/config'
 import express from 'express'
+import helmet from 'helmet'
+import cors from 'cors'
 
 import { connect } from './db.js'
+import organisation_routes from './routes/organisation_routes.js'
 
 
 const app = express()
 const port = 8080
 
 
+// app.use(helmet())
+// app.use(cors())
 app.use(express.json())
+
+app.use(organisation_routes)
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
