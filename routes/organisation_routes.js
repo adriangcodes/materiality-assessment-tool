@@ -43,13 +43,61 @@ router.get('/organisation/:id', async (req, res) => {
 // Create a new organisation
 router.post('/organisation', async (req, res) => {
     try {
-        const newOrganisation = new Organisation(req.body)
-        const savedOrganisation = await newOrganisation.save()
 
-        return res.status(201).send(savedOrganisation)
+        const bodyData = req.body
+
+        const organisation = await Organisation.create({
+            name: bodyData.name,
+            city: bodyData.city,
+            country: bodyData.country,
+            numberEmployees : bodyData.numberEmployees || 0,
+            industry: bodyData.industry || ''
+        })
         
+
+        return res.status(201).send(organisation)
+
     } catch (err) {
-        return res.status(400).send({error: err})
+        return res.status(400).send({error: err.message})
+    }
+})
+
+router.put('/organisation/:id', async (req, res) => {
+    try {
+        const organisationId = req.params.id
+        const organisation = await Organisation.findById(organisationId)
+
+        if (!organisation) {
+            return res.status(404).send({error: 'Organisation not found'})
+        }
+
+        const updatedOrganisation = await Organisation
+            .findByIdAndUpdate(
+                organisationId, 
+                req.body, 
+                {returnDocument: 'after'}
+            )
+
+        return res.send(updatedOrganisation)
+
+    } catch (err) {
+        return res.status(400).send({error: err.message})
+    }
+})
+
+
+router.delete('/organisation/:id', async (req, res) => {
+    try {
+        const organisationId = req.params.id
+
+        const deletedOrganisation = await Organisation.findByIdAndDelete(organisationId)
+        if (!deletedOrganisation) {
+            return res.status(404).send({ error: "Organisation not found"})
+        }
+        return res.send({message: "Organisation deleted successfully"})
+
+    } catch (err) {
+        res.status(400).send({error: err.message})
     }
 })
 
