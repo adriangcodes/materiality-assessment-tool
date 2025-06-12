@@ -5,6 +5,8 @@ import cors from 'cors'
 
 import { connect } from './db.js'
 import organisation_routes from './routes/organisation_routes.js'
+import user_routes from './routes/user_routes.js'
+
 
 
 const app = express()
@@ -16,6 +18,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(organisation_routes)
+app.use(user_routes)
 
 
 // Error handling middleware
