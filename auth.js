@@ -1,11 +1,12 @@
-import jwt from 'jsonwebtoken'
-import User from './models/user'
+import jwt from 'jsonwebtoken';
+import User from './models/user';
+import 'dotenv/config';
 
 // This function authenticates users using a JWT stored in an HTTP-only cookie
-export function auth(req, res, next) {
+export function auth (req, res, next) {
 
     // Extract the JWT from the token in the incoming request
-    let token = req.cookies.token
+    let token = req.cookies.token;
 
     if (!token) {
         const authHeader = req.headers.authorization;
