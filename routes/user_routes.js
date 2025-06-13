@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+import { auth, adminOnly } from '../auth.js'
 import User from '../models/user.js';
 import Organisation from '../models/organisation.js';
 
@@ -39,6 +40,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// Login
 router.post('/login', async (req, res) => {
     try {
         const bodyData = req.body;
@@ -89,5 +91,62 @@ router.post('/login', async (req, res) => {
         return res.status(400).send({ error: err.message });
     }
 });
+
+// Get all users
+router.get('/users', auth, async (req, res) => {
+    try {
+        const user = await User.find()
+
+        if (!user || user.length === 0) {
+            return res.status(404).send({ message: "No users found"})
+        }
+
+        return res.send(user)
+
+    } catch (err) {
+        res.status(400).send({ error: err.message })
+    }
+})
+
+router.put('/users/:id', auth, async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).send({ message: "User not found"})
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId, 
+            req.body,
+            {returnDocument: 'after'}
+        )
+
+        return res.send(updatedUser)
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    }
+})
+
+router.delete('/user/:id', auth, adminOnly, async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).send({ message: "User not found"})
+        }
+
+        const deletedUser = await User.findByIdAndDelete(userId)
+
+        return res.status(204).send({ message: "User has been deleted"})
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    } 
+})
 
 export default router;
