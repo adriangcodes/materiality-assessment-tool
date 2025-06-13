@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import Organisation from "./organisation.js";
 
 
 const surveySchema = new Schema(

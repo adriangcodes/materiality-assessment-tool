@@ -8,12 +8,6 @@ import bcrypt from 'bcrypt'
 // Connect to DB
 db.connect()
 
-try {
-    await mongoose.connection.db.collection('users').dropIndex('emailAddress_1');
-    console.log('Dropped old emailAddress index');
-} catch (error) {
-    console.log('Index emailAddress_1 does not exist or already dropped');
-}
 
 // User seed data
 const organisations = [
@@ -46,6 +40,7 @@ const users = [
 await User.deleteMany()
 await User.create(users)
 console.log('Users Created')
+
 
 // Disconnect from DB
 db.disconnect()

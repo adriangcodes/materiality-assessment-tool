@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { auth } from "../auth";
-import Survey from "../models/survey";
-import req from "express/lib/request";
+import { auth } from "../auth.js";
+import Survey from "../models/survey.js";
+
 
 
 
