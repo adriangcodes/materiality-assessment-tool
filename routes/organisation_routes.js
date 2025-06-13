@@ -94,7 +94,7 @@ router.delete('/organisation/:id', async (req, res) => {
         if (!deletedOrganisation) {
             return res.status(404).send({ error: "Organisation not found"})
         }
-        return res.send({message: "Organisation deleted successfully"})
+        return res.status(204).send({message: "Organisation deleted successfully"})
 
     } catch (err) {
         res.status(400).send({error: err.message})
