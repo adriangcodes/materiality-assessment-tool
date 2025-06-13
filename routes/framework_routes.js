@@ -55,6 +55,29 @@ router.post('/framework', auth, adminOnly, async (req, res) => {
     }
 })
 
+// Update a framework
+router.put('/framework/:id', auth, adminOnly, async (req, res) => {
+    try {
+        const frameworkId = req.params.id
+
+        const framework = await Framework.findById(frameworkId)
+        if (!framework) {
+            return res.status(404).send({ message: "No frameworks found"})
+        }
+
+        const updatedFramework = await Framework.findByIdAndUpdate(
+            frameworkId,
+            req.body,
+            { returnDocument: "after" }
+        )
+
+        return res.send({ action: "You have updated your framework", "updatedFramework" : updatedFramework})
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    }
+})
+
 // Delete a framework
 router.delete('/framework/:id', auth, adminOnly, async (req, res) => {
     try {
