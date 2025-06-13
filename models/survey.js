@@ -20,7 +20,8 @@ const surveySchema = new Schema(
         },
         status: {
             type: String,
-            enum: ['Active', 'Pending', 'Not Used']
+            enum: ['Draft', 'Active', 'Completed', 'Closed', 'Archived'],
+            default: 'Draft'
         },
         framework: {
             type: Schema.Types.ObjectId,
