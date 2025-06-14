@@ -1,7 +1,6 @@
 import { Router } from "express";
 import MasterQuestion from "../models/masterQuestion.js";
-import { adminOnly } from "../auth";
-import req from "express/lib/request";
+import { auth, adminOnly } from "../auth.js";
 
 const router = Router();
 
