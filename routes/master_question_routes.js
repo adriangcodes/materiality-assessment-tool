@@ -47,3 +47,24 @@ router.post('/master-question', auth, adminOnly, async (req, res) => {
         return res.status(400).send({ error: err.message })
     }
 })
+
+// Delete a master question
+router.delete('/master-question:id', auth, adminOnly, async (req, res) => {
+    try {
+        const questionId = req.params.id
+
+        const question = await MasterQuestion.findById(questionId)
+        if (!question) {
+            return res.status(404).send({ error: "No MasterQuestion found with that ID"})
+        }
+
+        const deletedQuestion = await MasterQuestion.findByIdAndDelete(questionId);
+
+        return res.status(204).send({ message: 'Master question has been deleted'})
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    }
+})
+
+export default router
