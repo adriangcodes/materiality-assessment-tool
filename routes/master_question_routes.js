@@ -42,7 +42,15 @@ router.post('/master-question', auth, adminOnly, async (req, res) => {
     try {
         const bodyData = req.body
         
-        const masterQuestion = await MasterQuestion.fin
+        const masterQuestion = await MasterQuestion.create({
+            questionText: bodyData.questionText,
+            questionType: bodyData.questionType,
+            options: bodyData.options,
+            framework: bodyData.framework
+        })
+
+        return res.status(201).send({ newMasterQuestion: masterQuestion})
+
     } catch (err) {
         return res.status(400).send({ error: err.message })
     }
