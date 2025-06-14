@@ -48,8 +48,23 @@ router.post('/master-question', auth, adminOnly, async (req, res) => {
     }
 })
 
+// Update a master question
+router.put('/master-question/:id', auth, adminOnly, async (req, res) => {
+    try {
+        const questionId = req.params.id
+
+        const question = await MasterQuestion.findById(questionId)
+        if (!question) {
+            return res.status(404).send({ error: "Question not found with that ID"})
+        }
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    }
+})
+
 // Delete a master question
-router.delete('/master-question:id', auth, adminOnly, async (req, res) => {
+router.delete('/master-question/:id', auth, adminOnly, async (req, res) => {
     try {
         const questionId = req.params.id
 
