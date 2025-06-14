@@ -55,6 +55,8 @@ router.post('/survey', auth, async (req, res) => {
             createdBy: bodyData.createdBy
         })
 
+        return res.status(201).send({newSurvey})
+
     } catch (err) {
         return res.status(400).send({ error: err.message })
     }
