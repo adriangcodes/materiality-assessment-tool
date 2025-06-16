@@ -10,6 +10,7 @@ import user_routes from './routes/user_routes.js';
 import survey_routes from './routes/survey_routes.js';
 import framework_routes from './routes/framework_routes.js';
 import master_question_routes from './routes/master_question_routes.js'
+import survey_question_routes from './routes/survey_question_routes.js'
 
 
 
@@ -27,6 +28,7 @@ app.use(user_routes);
 app.use(survey_routes);
 app.use(framework_routes);
 app.use(master_question_routes)
+app.use(survey_question_routes)
 
 
 // Error handling middleware
