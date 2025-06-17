@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { auth } from "../auth.js";
+import { adminOnly, auth } from "../auth.js";
 import Survey from "../models/survey.js";
 
 
@@ -86,7 +86,7 @@ router.put('/survey/:id', auth, async (req, res) => {
 })
 
 // Delete a survey
-router.delete('/survey/:id', auth, async (req, res) => {
+router.delete('/survey/:id', auth, adminOnly, async (req, res) => {
     try {
         const surveyId = req.params.id
 

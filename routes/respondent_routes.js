@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Respondent from '../models/respondent.js';
-import { auth } from '../auth.js';
+import { adminOnly, auth } from '../auth.js';
 
 const router = Router();
 
@@ -88,7 +88,7 @@ router.put('/respondent/:id', auth, async (req, res) => {
 })
 
 // Delete a Respondent
-router.delete('/respondent/:id', auth, async (req, res) => {
+router.delete('/respondent/:id', auth, adminOnly, async (req, res) => {
     try {
         const respondentId = req.params.id
 

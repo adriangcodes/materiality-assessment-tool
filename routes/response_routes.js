@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { auth } from "../auth.js";
+import { adminOnly, auth } from "../auth.js";
 import Response from "../models/response.js";
 
 const router = Router();
@@ -79,7 +79,7 @@ router.put('/response/:id', auth, async (req, res) => {
 })
 
 // Delete a response
-router.delete('/response/:id', auth, async (req, res) => {
+router.delete('/response/:id', auth, adminOnly, async (req, res) => {
     try {
         const responseId = req.params.id
 
