@@ -76,7 +76,7 @@ router.put('/respondent/:id', auth, async (req, res) => {
 
         const updatedRespondent = await Respondent.findByIdAndUpdate(
             respondentId,
-            bodyData,
+            req.body,
             { returnDocument: "after" }
         )
 
@@ -99,8 +99,8 @@ router.delete('/respondent/:id', auth, async (req, res) => {
 
         const deletedRespondent = await Respondent.findByIdAndDelete(respondentId)
 
-        return res.status(204)
-        
+        return res.status(204).send({message : "Deleted respondent"})
+
     } catch (err) {
         return res.status(400).send({ error : err.message})
     }
