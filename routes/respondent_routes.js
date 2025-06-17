@@ -64,4 +64,46 @@ router.post('/respondent', auth, async (req, res) => {
     }
 })
 
+// Update a Respondent
+router.put('/respondent/:id', auth, async (req, res) => {
+    try {
+        const respondentId = req.params.id
+
+        const respondent = await Respondent.findById(respondentId)
+        if (!respondent) {
+            return res.status(404).send({ error : "No respondent found with that ID"})
+        }
+
+        const updatedRespondent = await Respondent.findByIdAndUpdate(
+            respondentId,
+            bodyData,
+            { returnDocument: "after" }
+        )
+
+        return res.send({ message : "Updated Successfully", "updatedRespondent" : updatedRespondent})
+
+    } catch (err) {
+        return res.status(400).send({ error: err.message })
+    }
+})
+
+// Delete a Respondent
+router.delete('/respondent/:id', auth, async (req, res) => {
+    try {
+        const respondentId = req.params.id
+
+        const respondent = await Respondent.findById(req.params.id)
+        if (!respondent) {
+            return res.status(400).send({ error: "No respondent found with that ID"})
+        }
+
+        const deletedRespondent = await Respondent.findByIdAndDelete(respondentId)
+
+        return res.status(204)
+        
+    } catch (err) {
+        return res.status(400).send({ error : err.message})
+    }
+})
+
 export default router
