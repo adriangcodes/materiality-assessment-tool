@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import Organisation from "../models/organisation.js";
+import { adminOnly, auth } from '../auth.js';
 
 const router = Router();
 
@@ -86,7 +87,7 @@ router.put('/organisation/:id', async (req, res) => {
 })
 
 
-router.delete('/organisation/:id', async (req, res) => {
+router.delete('/organisation/:id', auth, adminOnly, async (req, res) => {
     try {
         const organisationId = req.params.id
 

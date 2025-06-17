@@ -47,7 +47,7 @@ router.post('/survey-question', auth, adminOnly, async (req, res) => {
         const question = await SurveyQuestion.create(
             {
                 surveyId: bodyData.surveyId,
-                questionId: bodyData.surveyId,
+                questionId: bodyData.questionId,
                 order: bodyData.order,
                 isActive: bodyData.isActive || true,
                 isRequired: bodyData.isRequired || false
