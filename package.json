@@ -9,8 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch index.js",
-    "seed org": "node seed_org.js",
-    "seed mq": "node seed_master_questions.js"
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",
