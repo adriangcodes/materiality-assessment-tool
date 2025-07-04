@@ -5,7 +5,7 @@ import { auth, adminOnly } from "../auth.js";
 const router = Router();
 
 // Get all Master Questions
-router.get('/master-question', auth, async (req, res) => {
+router.get('/master-question', async (req, res) => {
     try {
         const masterQuestions = await MasterQuestion.find()
 
