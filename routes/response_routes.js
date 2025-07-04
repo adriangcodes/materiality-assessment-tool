@@ -38,7 +38,7 @@ router.get('/response/:id', auth, async (req, res) => {
 })
 
 // Create a response
-router.post('/response', auth, async (req, res) => {
+router.post('/response', async (req, res) => {
     try {
         const bodyData = req.body
         const newResponse = await Response.create(
