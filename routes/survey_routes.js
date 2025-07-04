@@ -24,7 +24,7 @@ router.get('/survey', auth, async (req, res) => {
 })
 
 // Get one survey
-router.get('/survey/:id', auth, async (req, res) => {
+router.get('/survey/:id', async (req, res) => {
     try {
         const surveyId = req.params.id
 
