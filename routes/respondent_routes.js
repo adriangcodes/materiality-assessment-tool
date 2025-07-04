@@ -37,7 +37,7 @@ router.get('/respondent/:id', auth, async (req, res) => {
 })
 
 // Create a respondent
-router.post('/respondent', auth, async (req, res) => {
+router.post('/respondent', async (req, res) => {
     try {
         const bodyData = req.body
         const respondent = await Respondent.create(
