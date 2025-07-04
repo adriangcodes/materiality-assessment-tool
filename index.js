@@ -19,6 +19,17 @@ import response_routes from './routes/response_routes.js'
 const app = express();
 const port = 8080;
 
+const allowedOrigins = ['http://localhost:5173']
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}))
 
 app.use(helmet());
 app.use(cors());
