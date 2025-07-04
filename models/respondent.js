@@ -1,3 +1,4 @@
+import validator from 'validator'
 import { Schema, model } from 'mongoose'
 
 const respondentSchema = new Schema(
@@ -22,10 +23,10 @@ const respondentSchema = new Schema(
         emailAddress: {
             type: String,
             required: true,
-            match: [
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 
-                'Please enter a valid email address'
-              ]
+            validate: {
+                validator: v => validator.isEmail(v),
+                message: 'Please enter a valid email address.'
+            }
         },
         region: {
             type: String
