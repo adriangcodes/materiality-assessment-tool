@@ -28,7 +28,9 @@ router.get('/survey/:id', async (req, res) => {
     try {
         const surveyId = req.params.id
 
-        const survey = await Survey.findById(surveyId)
+        const survey = await Survey
+            .findById(surveyId)
+            .populate('organisationId', 'name')
         if (!survey) {
             return res.status(404).send({ message: "Survey not found with that ID" })
         }
