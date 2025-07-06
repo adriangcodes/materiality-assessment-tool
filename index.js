@@ -19,7 +19,7 @@ import response_routes from './routes/response_routes.js'
 const app = express();
 const port = 8080;
 
-const allowedOrigins = ['http://localhost:5173', 'https://materialityassessmenttool.netlify.app/']
+const allowedOrigins = ['http://localhost:5173', 'https://materialityassessmenttool.netlify.app']
 
 app.use(cors({
   origin: (origin, callback) => {
