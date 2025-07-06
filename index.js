@@ -32,7 +32,6 @@ app.use(cors({
 }))
 
 app.use(helmet());
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
